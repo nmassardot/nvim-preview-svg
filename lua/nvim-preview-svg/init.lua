@@ -5,4 +5,9 @@ local bufferToString = function()
   return table.concat(content, "")
 end
 
+local getSvg = function(content)
+  local svgMatch = string.match(content, "<svg>.*</svg>")
+  return svgMatch
+end
+
 return M
