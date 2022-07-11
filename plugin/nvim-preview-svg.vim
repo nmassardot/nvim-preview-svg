@@ -3,7 +3,7 @@ let s:save_cpo = &cpo
 set cpo&vim
 
 " Command to run the preview
-command! PreviewSvg lua require("nvim-preview-svg").previewSvg()
+command! PreviewSvg lua require("nvim-preview-svg").preview_svg()
 
 let &cpo = s:save_cpo " and restore after
 unlet s:save_cpo
