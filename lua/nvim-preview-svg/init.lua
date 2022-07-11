@@ -6,7 +6,7 @@ local buffer_to_string = function()
 end
 
 local get_svg = function(content)
-  local svg_match = string.match(content, "<svg>.*</svg>")
+  local svg_match = content:match "<svg>.*</svg>"
   return svg_match
 end
 
