@@ -10,4 +10,11 @@ local get_svg = function(content)
   return svg_match
 end
 
+function M.preview_svg()
+  local content = buffer_to_string()
+  local matching_svg = get_svg(content)
+  local tmp_file = io.tmpfile()
+  tmp_file:write(matching_svg)
+end
+
 return M
