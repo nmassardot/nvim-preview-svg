@@ -6,15 +6,49 @@ local buffer_to_string = function()
 end
 
 local get_svg = function(content)
-  local svg_match = content:match "<svg>.*</svg>"
+  local svg_match = content:match "<svg .*>.*</svg>"
   return svg_match
 end
+
+local function show_html(some_html)
+  local encoder_table = {}
+  for _, chars in ipairs{'==', 'AZ', 'az', '09', '++', '//'} do
+     for ascii = chars:byte(), chars:byte(2) do
+        table.insert(encoder_table, string.char(ascii))
+     end
+  end
+
+  local function tobase64(str)
+     local result, pos = {}, 1
+     while pos <= #str do
+        local last3 = {str:byte(pos, pos+2)}
+        local padded = 3 - #last3
+        for j = 1, padded do
+           table.insert(last3, 0)
+        end
+        local codes = {
+           math.floor(last3[1] / 4),
+           last3[1] % 4 * 16 + math.floor(last3[2] / 16),
+           last3[2] % 16 * 4 + math.floor(last3[3] / 64),
+           last3[3] % 64
+        }
+        for j = 1, 4 do
+           codes[j] = encoder_table[j+padded > 4 and 1 or 2+codes[j]]
+        end
+        pos = pos + 3
+        table.insert(result, table.concat(codes))
+     end
+     return table.concat(result)
+  end
+
+  vim.fn.systemlist("open -a  'Google Chrome' 'data:text/html;charset=utf-8;base64,'" ..tobase64(some_html))
+end
+
 
 function M.preview_svg()
   local content = buffer_to_string()
   local matching_svg = get_svg(content)
-  local tmp_file = io.tmpfile()
-  tmp_file:write(matching_svg)
+  show_html(matching_svg)
 end
 
 return M
