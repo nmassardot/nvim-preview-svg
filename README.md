@@ -2,9 +2,14 @@
 This plugin was created for visualizing the SVGs embedded (as HTML) in ReactJS, VueJS or, really, in every file. We hope this saves a lot of headaches (and time) for you
 
 ## Installation
-Using [packer.nvim](https://github.com/wbthomason/packer.nvim)
-```
+- Using [packer.nvim](https://github.com/wbthomason/packer.nvim)
+```lua
 use { 'nmassardot/nvim-preview-svg' }
+```
+
+- Using [vim-plug](https://github.com/junegunn/vim-plug)
+```lua
+Plug 'nmassardot/nvim-preview-svg' -- Then run :PlugInstall
 ```
 
 ## Usage
