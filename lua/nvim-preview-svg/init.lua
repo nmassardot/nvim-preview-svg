@@ -11,7 +11,10 @@ local get_svg = function(content)
   return svg_match
 end
 
-local function show_html(some_html)
+-- This function was found in
+-- https://stackoverflow.com/questions/41310742/how-to-start-browser-with-html-string-with-lua
+
+local function show_html(html_in_string)
   local encoder_table = {}
   for _, chars in ipairs{'==', 'AZ', 'az', '09', '++', '//'} do
      for ascii = chars:byte(), chars:byte(2) do
@@ -42,7 +45,7 @@ local function show_html(some_html)
      return table.concat(result)
   end
 
-  vim.fn.systemlist("open -a  'Google Chrome' 'data:text/html;charset=utf-8;base64,'" ..tobase64(some_html))
+  vim.fn.systemlist("open -a  'Google Chrome' 'data:text/html;charset=utf-8;base64,'" ..tobase64(html_in_string))
 end
 
 
