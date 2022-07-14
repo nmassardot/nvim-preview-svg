@@ -13,9 +13,10 @@ function M.setup(user_opts)
   local opts = user_opts or {}
   new_opts = vim.tbl_extend('force', get_default_options(), opts)
 end
+M.setup()
 
 local open_cmd = function()
-  local cmd = "open -a " .. "'" .. new_opts.browser .. "'"
+  local cmd = "open -na " .. "'" .. new_opts.browser .. "'"
   if new_opts.args then
     cmd = cmd .. " --args"
   end
