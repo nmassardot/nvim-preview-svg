@@ -13,6 +13,7 @@ function M.setup(user_opts)
   local opts = user_opts or {}
   new_opts = vim.tbl_extend('force', get_default_options(), opts)
 end
+M.setup()
 
 local open_cmd = function()
   local cmd = "open -a " .. "'" .. new_opts.browser .. "'"
@@ -31,7 +32,9 @@ local get_svg = function(content)
   local svg_match = content:match "<svg.*>.*</svg>"
 
   if svg_match then
-    svg_match = svg_match:gsub("none", "black")
+    if string.find(svg_match, "stroke") then
+      svg_match = svg_match:gsub("stroke=[\"'{].-[\"'}]", "stroke=\"black\"")
+    end
   else
     error("No svg tag in this file")
   end
