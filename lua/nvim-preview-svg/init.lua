@@ -6,7 +6,7 @@ local buffer_to_string = function()
 end
 
 local get_svg = function(content)
-  local svg_match = content:match "<svg .*>.*</svg>"
+  local svg_match = content:match "<svg.*>.*</svg>"
   svg_match = svg_match:gsub("none", "black")
   return svg_match
 end
