@@ -34,6 +34,8 @@ local get_svg = function(content)
   if svg_match then
     if string.find(svg_match, "stroke") then
       svg_match = svg_match:gsub("stroke=[\"'{].-[\"'}]", "stroke=\"black\"")
+    else
+      svg_match = svg_match:gsub("fill=[\"'{].-[\"'}]", "fill=\"black\"")
     end
   else
     error("No svg tag in this file")
