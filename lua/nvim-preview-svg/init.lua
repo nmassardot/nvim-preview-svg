@@ -1,4 +1,26 @@
 local M = {}
+local new_opts = {}
+
+local get_default_options = function()
+  local default_opts={
+    browser = "Google Chrome",
+    args = true,
+  }
+  return default_opts
+end
+
+function M.setup(user_opts)
+  local opts = user_opts or {}
+  new_opts = vim.tbl_extend('force', get_default_options(), opts)
+end
+
+local open_cmd = function()
+  local cmd = "open -a " .. "'" .. new_opts.browser .. "'"
+  if new_opts.args then
+    cmd = cmd .. " --args"
+  end
+  return cmd
+end
 
 local buffer_to_string = function()
   local content = vim.api.nvim_buf_get_lines(0, 0, vim.api.nvim_buf_line_count(0), false)
@@ -51,7 +73,7 @@ local function show_html(html_in_string)
      return table.concat(result)
   end
 
-  vim.fn.systemlist("open -a  'Google Chrome' 'data:text/html;charset=utf-8;base64,'" ..tobase64(html_in_string))
+  vim.fn.systemlist(open_cmd() .. " 'data:text/html;charset=utf-8;base64," ..tobase64(html_in_string) .. "'")
 end
 
 
