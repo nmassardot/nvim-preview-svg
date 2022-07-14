@@ -7,7 +7,13 @@ end
 
 local get_svg = function(content)
   local svg_match = content:match "<svg.*>.*</svg>"
-  svg_match = svg_match:gsub("none", "black")
+
+  if svg_match then
+    svg_match = svg_match:gsub("none", "black")
+  else
+    error("No svg tag in this file")
+  end
+
   return svg_match
 end
 
