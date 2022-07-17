@@ -1,0 +1,25 @@
+================================================================================
+INTRODUCTION                                                  *nvim-preview-svg*
+
+nvim-preview-svg is a plugin for previewing a SVG contained in any file. It saves
+you time showing you which SVG are you working with, instead of start guessing
+what it can be
+
+Getting started:
+  1. Put a `requrie("nvim-preview-svg").setup()` call somewhere in your NeoVim
+  config.
+  2. Run `:PreviewSvg` to preview the SVG of the current file.
+  3. Stonks
+
+nvim-preview-svg.setup({opts})                        *nvim-preview-svg.setup()*
+  Setup function to be run by the user. Calling it without the param sets the
+  config as default.
+
+  Usage:
+  >
+  require("nvim-preview-svg").setup({
+    browser = "Brave Browser" -- This can be any browser you want (and have)
+    args = true -- This is a extra flag for some MacOS versions. If the plugin
+                -- doesn't work at first, try setting this to false
+  })
+<
