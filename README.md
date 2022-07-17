@@ -29,7 +29,7 @@ Run `:PreviewSvg` and it will open a browser window with the SVG parsed from the
 
 ## Disclaimer
 
-Currently working fine with SVGs that have a `stroke` property and working sometimes with the ones that have a `fill` property
+Currently working fine with SVGs that have only one `stroke` or `fill` property. Manage more than one per SVG is work in progress
 
 ## Contributing
 
