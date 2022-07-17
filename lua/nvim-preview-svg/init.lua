@@ -13,7 +13,6 @@ function M.setup(user_opts)
   local opts = user_opts or {}
   new_opts = vim.tbl_extend('force', get_default_options(), opts)
 end
-M.setup()
 
 local open_cmd = function()
   local cmd = "open -na " .. "'" .. new_opts.browser .. "'"
