@@ -15,7 +15,7 @@ function M.setup(user_opts)
 end
 
 local open_cmd = function()
-  local cmd = "open -a " .. "'" .. new_opts.browser .. "'"
+  local cmd = "open -na " .. "'" .. new_opts.browser .. "'"
   if new_opts.args then
     cmd = cmd .. " --args"
   end
@@ -31,7 +31,11 @@ local get_svg = function(content)
   local svg_match = content:match "<svg.*>.*</svg>"
 
   if svg_match then
-    svg_match = svg_match:gsub("none", "black")
+    if string.find(svg_match, "stroke") then
+      svg_match = svg_match:gsub("stroke=[\"'{].-[\"'}]", "stroke=\"black\"")
+    else
+      svg_match = svg_match:gsub("fill=[\"'{].-[\"'}]", "fill=\"black\"")
+    end
   else
     error("No svg tag in this file")
   end
